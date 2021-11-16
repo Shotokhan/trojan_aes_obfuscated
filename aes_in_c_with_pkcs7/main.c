@@ -34,29 +34,30 @@ int main() {
 
  	printf("ECB decrypt:");
 
-
-	
 	size_t len = 176;
 	for (int i=0; i<len; i+=16)
 		AES_ECB_decrypt(&ctx, out+i);
+
 	for (int i=0; i<len;i++){
-        		printf("%02x",out[i]);
-	    }
+        	printf("%02x",out[i]);
+	}
 	printf("\n");
  	
-    printf("\n");
-    size_t actualDataLength = pkcs7_padding_data_length( out, 176, 16);
-    printf("The actual data length (without the padding) = %ld\n", actualDataLength);
+	printf("\n");
+	size_t actualDataLength = pkcs7_padding_data_length( out, 176, 16);
+	printf("The actual data length (without the padding) = %ld\n", actualDataLength);
     
-    printf("the decrypted STRING in hex = ");
-    for (int i=0; i<actualDataLength;i++){
-        printf("%02x",out[i]);
-    }
-    printf("\n");
-    if (0 == memcmp((char*) in, (char*) out, actualDataLength)) {
- 		printf("SUCCESS DECRYPT!\n");
+	printf("the decrypted STRING in hex = ");
+	
+	for (int i=0; i<actualDataLength;i++){
+		printf("%02x",out[i]);
+    	}
+	printf("\n");
+	if (0 == memcmp((char*) in, (char*) out, actualDataLength)) {
+		printf("SUCCESS DECRYPT!\n");
  	} else {
- 	    printf("FAILURE DECRYPT!\n");
+		printf("FAILURE DECRYPT!\n");
  	}
-   return 0;
+ 	
+	return 0;
 }
